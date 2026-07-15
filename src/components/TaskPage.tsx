@@ -142,8 +142,15 @@ export function TaskPage() {
         ))}
       </div>
 
-      {showAddTask && (
-        <AddTaskModal roomId={roomId} onClose={() => setShowAddTask(false)} onCreated={loadRoom} />
+      
+
+       {showAddTask && (
+        <AddTaskModal
+          roomId={roomId}
+          houseId={room.houseId}
+          onClose={() => setShowAddTask(false)}
+          onCreated={loadRoom}
+        />
       )}
 
       {showTemplatePicker && roomId && (

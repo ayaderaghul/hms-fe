@@ -101,6 +101,7 @@ async function handleMarkDone() {
   }
 }
 
+console.log(task)
 
   return (
 
@@ -337,6 +338,30 @@ async function handleMarkDone() {
 
         )}
 
+        {task.assignedTo.length > 0 && (
+  <div>
+    <p
+      className="text-[11px] uppercase tracking-wide"
+      style={{ color: "#94A090" }}
+    >
+      Assigned to
+    </p>
+
+    <div className="flex flex-wrap gap-2 mt-2">
+        {task.assignedTo.map(({ person }) => (
+        <button
+          key={person.id}
+          onClick={() => navigate(`/people/${person.id}`)}
+          className="rounded-full px-3 py-1 text-sm border hover:bg-gray-50 transition"
+          style={{ borderColor: BORDER }}
+        >
+          {person.username}
+        </button>
+      ))}
+    </div>
+  </div>
+)}
+
 
       </div>
 
@@ -345,13 +370,12 @@ async function handleMarkDone() {
 
 
       {showEdit && (
-
         <EditTaskModal
           task={task}
+          houseId={task.room.houseId} // <-- This requires updating your types & backend!
           onClose={() => setShowEdit(false)}
           onSaved={loadTask}
         />
-
       )}
 
 {fullImage && (

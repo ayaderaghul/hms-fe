@@ -8,6 +8,7 @@ import { TaskPage } from "./components/TaskPage";
 import { TaskDetailPage } from "./components/TaskDetailPage";
 import { Layout } from "./components/Layout";
 import {PeoplePage} from "./components/PeoplePage"
+import {PersonDetailPage} from "./components/PersonDetailPage"
 function App() {
   return (
     <Routes>
@@ -40,7 +41,11 @@ function App() {
 
 <Route path="/houses/:houseId/people" element={<PeoplePage />} />
 
-{/* <Route path="/*" element={<HousesPage />} /> */}
+<Route
+    path="/people/:personId"
+    element={<PersonDetailPage />}
+  />
+
   </Route>
 
     </Routes>

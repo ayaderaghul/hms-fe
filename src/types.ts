@@ -13,20 +13,46 @@ export interface RoomSummary {
   totalTasks: number;
   doneTasks: number;
 }
-
+export interface TaskAssignment {
+  taskId: string;
+  personId: string;
+  person: {
+    id: string;
+    username: string;
+  };
+}
 // src/types.ts
+// export interface Task {
+//   id: string;
+//   title: string;
+//   desc: string;
+//   tools: string[];
+//   howto: string;
+//   descImages: string[];
+// toolImages: string[];
+// howtoImages: string[];
+
+//   dueDate: string | null;
+//   completedAt: string | null;
+// }
 export interface Task {
   id: string;
   title: string;
   desc: string;
   tools: string[];
   howto: string;
-  descImages: string[];
-toolImages: string[];
-howtoImages: string[];
-
   dueDate: string | null;
+  createdAt: string;
   completedAt: string | null;
+  descImages: string[];
+  howtoImages: string[];
+  toolImages: string[];
+  roomId: string;
+  assignedTo: TaskAssignment[];  // Add this
+  room: {
+    id: string;
+    houseId: string;
+  };
 }
 
 // src/types.ts
