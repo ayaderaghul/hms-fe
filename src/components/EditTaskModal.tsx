@@ -131,7 +131,7 @@ howtoImages.forEach(file =>
   }
 />
         <input type="date" className={inputClass} style={inputStyle} 
-        // value={dueDate} 
+        value={dueDate} 
         onChange={(e) => setDueDate(e.target.value)} />
         {error && <p className="text-xs text-red-600">{error}</p>}
         <button

@@ -4,6 +4,7 @@ export interface HouseSummary {
   name: string;
   totalTasks: number;
   doneTasks: number;
+  people: {id: string; username: string}
 }
 
 export interface RoomSummary {
@@ -26,4 +27,18 @@ howtoImages: string[];
 
   dueDate: string | null;
   completedAt: string | null;
+}
+
+// src/types.ts
+export interface PersonTask {
+  id: string;
+  title: string;
+  completedAt: string | null;
+}
+
+export interface Person {
+  id: string;
+  username: string;
+  email: string;
+  tasks: PersonTask[];
 }
