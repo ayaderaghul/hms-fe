@@ -46,6 +46,21 @@ const [showAddTemplate, setShowAddTemplate] = useState(false);
     }
   }
 
+  async function deleteTemplate(templateId: string) {
+  try {
+    const res = await fetch(`${API}/api/templates/${templateId}`, {
+      method: "DELETE",
+    });
+
+    if (!res.ok) throw new Error();
+
+    loadTemplates();
+
+  } catch {
+    setError("Could not delete template");
+  }
+}
+
   return (
     <Modal title="Add templated task" onClose={onClose}>
       <button
@@ -64,20 +79,46 @@ const [showAddTemplate, setShowAddTemplate] = useState(false);
       ) : (
         <div className="flex flex-col gap-2 mb-3">
           {templates.map((t) => (
-            <button
-              key={t.id}
-              onClick={() => useTemplate(t.id)}
-              className="text-left rounded-lg px-3 py-2 text-sm"
-              style={{ border: `1px solid ${BORDER}` }}
-            >
-              <p className="font-medium">{t.title}</p>
-              {t.desc && (
-                <p className="text-[12px] mt-0.5" style={{ color: "#5A6558" }}>
-                  {t.desc}
-                </p>
-              )}
-            </button>
-          ))}
+  <div
+    key={t.id}
+    className="flex items-center justify-between rounded-lg px-3 py-2"
+    style={{
+      border: `1px solid ${BORDER}`,
+    }}
+  >
+
+    <button
+      onClick={() => useTemplate(t.id)}
+      className="flex-1 text-left text-sm"
+    >
+      <p className="font-medium">
+        {t.title}
+      </p>
+
+      {t.desc && (
+        <p
+          className="text-[12px] mt-0.5"
+          style={{ color: "#5A6558" }}
+        >
+          {t.desc}
+        </p>
+      )}
+    </button>
+
+
+    <button
+      onClick={() => deleteTemplate(t.id)}
+      className="ml-3 text-xs rounded-full px-3 py-1"
+      style={{
+        color: "#A33",
+        border: `1px solid #E0B4B4`,
+      }}
+    >
+      Delete
+    </button>
+
+  </div>
+))}
         </div>
       )}
 
