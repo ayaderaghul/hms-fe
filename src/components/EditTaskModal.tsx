@@ -19,7 +19,7 @@ export function EditTaskModal({
   const [dueDate, setDueDate] = useState(task.dueDate ? task.dueDate.slice(0, 10) : "");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
+  const API = import.meta.env.VITE_API_URL;
   const inputClass = "w-full rounded-lg px-3 py-2 text-sm border outline-none";
   const inputStyle = { backgroundColor: "#FFFFFF", borderColor: "#E0E3D6" };
 
@@ -31,7 +31,7 @@ export function EditTaskModal({
     setSubmitting(true);
     setError(null);
     try {
-      const res = await fetch(`/api/tasks/${task.id}`, {
+      const res = await fetch(`${API}/api/tasks/${task.id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

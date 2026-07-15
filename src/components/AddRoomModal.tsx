@@ -14,7 +14,7 @@ export function AddRoomModal({
   const [name, setName] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
+  const API = import.meta.env.VITE_API_URL;
   async function handleSubmit() {
     if (!name.trim()) {
       setError("Enter a name");
@@ -23,7 +23,7 @@ export function AddRoomModal({
     setSubmitting(true);
     setError(null);
     try {
-      const res = await fetch(`/api/houses/${houseId}/rooms`, {
+      const res = await fetch(`${API}/api/houses/${houseId}/rooms`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name }),

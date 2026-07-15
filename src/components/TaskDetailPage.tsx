@@ -15,9 +15,9 @@ export function TaskDetailPage({ taskId, onBack }: { taskId: string; onBack: () 
   const [task, setTask] = useState<Task | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [showEdit, setShowEdit] = useState(false);
-
+  const API = import.meta.env.VITE_API_URL;
   function loadTask() {
-    fetch(`/api/tasks/${taskId}`)
+    fetch(`${API}/api/tasks/${taskId}`)
       .then((res) => res.json())
       .then(setTask)
       .catch(() => setError("Could not load this task"));

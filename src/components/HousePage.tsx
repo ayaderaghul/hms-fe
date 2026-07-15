@@ -17,9 +17,9 @@ export function HousePage({ houseId, onBack }: { houseId: string; onBack: () => 
   const [error, setError] = useState<string | null>(null);
   const [showAddRoom, setShowAddRoom] = useState(false);
   const [selectedRoomId, setSelectedRoomId] = useState<string | null>(null);
-
+  const API = import.meta.env.VITE_API_URL;
   function loadHouse() {
-    fetch(`/api/houses/${houseId}/rooms`)
+    fetch(`${API}/api/houses/${houseId}/rooms`)
       .then((res) => res.json())
       .then(setHouse)
       .catch(() => setError("Could not load this house"));

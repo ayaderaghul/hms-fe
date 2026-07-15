@@ -17,9 +17,9 @@ export function TaskPage({ roomId, onBack }: { roomId: string; onBack: () => voi
   const [error, setError] = useState<string | null>(null);
   const [showAddTask, setShowAddTask] = useState(false);
   const [selectedTaskId, setSelectedTaskId] = useState<string | null>(null);
-
+  const API = import.meta.env.VITE_API_URL;
   function loadRoom() {
-    fetch(`/api/rooms/${roomId}/tasks`)
+    fetch(`${API}/api/rooms/${roomId}/tasks`)
       .then((res) => res.json())
       .then(setRoom)
       .catch(() => setError("Could not load this room"));

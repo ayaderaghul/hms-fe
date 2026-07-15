@@ -11,9 +11,10 @@ function App() {
   const [error, setError] = useState<string | null>(null);
   const [selectedHouseId, setSelectedHouseId] = useState<string | null>(null);
   const [showAddHouse, setShowAddHouse] = useState(false);
+  const API = import.meta.env.VITE_API_URL;
 
   function loadHouses() {
-    fetch("/api/houses")
+    fetch(`${API}/api/houses`)
       .then((res) => res.json())
       .then(setHouses)
       .catch(() => setError("Could not load houses"));

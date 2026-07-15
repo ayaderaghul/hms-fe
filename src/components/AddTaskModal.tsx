@@ -18,7 +18,7 @@ export function AddTaskModal({
   const [dueDate, setDueDate] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
+  const API = import.meta.env.VITE_API_URL;
   const inputClass = "w-full rounded-lg px-3 py-2 text-sm border outline-none";
   const inputStyle = { backgroundColor: "#FFFFFF", borderColor: "#E0E3D6" };
 
@@ -30,7 +30,7 @@ export function AddTaskModal({
     setSubmitting(true);
     setError(null);
     try {
-      const res = await fetch(`/api/rooms/${roomId}/tasks`, {
+      const res = await fetch(`${API}/api/rooms/${roomId}/tasks`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
