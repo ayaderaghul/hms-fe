@@ -3,7 +3,7 @@
 
 import { useEffect, useState } from "react";
 import { ArrowLeft, Plus } from "lucide-react";
-import { Link,useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { RoomCard } from "./RoomCard";
 import { AddRoomModal } from "./AddRoomModal";

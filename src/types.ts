@@ -4,7 +4,7 @@ export interface HouseSummary {
   name: string;
   totalTasks: number;
   doneTasks: number;
-  people: {id: string; username: string}
+  people: {id: string; username: string}[]
 }
 
 export interface RoomSummary {
