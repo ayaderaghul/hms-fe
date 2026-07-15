@@ -40,6 +40,7 @@ function App() {
 
 <Route path="/houses/:houseId/people" element={<PeoplePage />} />
 
+{/* <Route path="/*" element={<HousesPage />} /> */}
   </Route>
 
     </Routes>

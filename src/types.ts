@@ -42,3 +42,15 @@ export interface Person {
   email: string;
   tasks: PersonTask[];
 }
+
+// src/types.ts
+export interface TaskTemplate {
+  id: string;
+  title: string;
+  desc: string;
+  tools: string[];
+  howto: string;
+  descImages: string[];
+  toolImages: string[];
+  howtoImages: string[];
+}

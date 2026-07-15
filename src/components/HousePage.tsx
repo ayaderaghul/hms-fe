@@ -99,9 +99,7 @@ export function HousePage() {
         <h2 className="text-[20px] font-semibold">
           {house.name}: {houseSummary.doneTasks}/{houseSummary.totalTasks}
         </h2>
-{/* <Link to={`/houses/${houseId}/people`} className="text-sm font-medium" style={{ color: "#2F5233" }}>
-  See people
-</Link> */}
+
 
 <button
           onClick={() => navigate(`/houses/${houseId}/people`)}

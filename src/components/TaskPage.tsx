@@ -5,12 +5,15 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { TaskRow } from "./TaskRow";
 import { AddTaskModal } from "./AddTaskModal";
-
+import {TemplatePickerModal} from "./TemplatePickerModal"
 import type { Task } from "../types";
+const BORDER = "#E0E3D6";
 
 interface RoomDetail {
   id: string;
   name: string;
+  houseId: string;
+
   tasks: Task[];
 }
 
@@ -21,6 +24,7 @@ export function TaskPage() {
   const [room, setRoom] = useState<RoomDetail | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [showAddTask, setShowAddTask] = useState(false);
+  const [showTemplatePicker, setShowTemplatePicker] = useState(false);
 
   const API = import.meta.env.VITE_API_URL;
 
@@ -85,6 +89,15 @@ export function TaskPage() {
           <Plus size={15} />
           Add task
         </button>
+
+        <button
+  onClick={() => setShowTemplatePicker(true)}
+  className="flex items-center gap-1 text-sm font-medium rounded-full px-3.5 py-2"
+  style={{ border: `1px solid ${BORDER}`, color: "#2F5233" }}
+>
+  <Plus size={15} />
+  Add templated task
+</button>
       </div>
 
       <p className="text-[11px] uppercase tracking-wide mb-2" style={{ color: "#94A090" }}>
@@ -132,6 +145,18 @@ export function TaskPage() {
       {showAddTask && (
         <AddTaskModal roomId={roomId} onClose={() => setShowAddTask(false)} onCreated={loadRoom} />
       )}
+
+      {showTemplatePicker && roomId && (
+  <TemplatePickerModal
+    roomId={roomId}
+    houseId={room.houseId}
+    onClose={() => setShowTemplatePicker(false)}
+    onCreated={loadRoom}
+  />
+)}
+
+
+
     </div>
   );
 }
