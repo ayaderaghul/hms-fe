@@ -2,12 +2,12 @@
 import type { HouseSummary } from "../types";
 import { Dial } from "./Dial";
 const BORDER = "#E0E3D6";
-
-export function HouseCard({ house, onClick }: { house: HouseSummary; onClick: () => void }) {
-
+import { useNavigate } from "react-router-dom";
+export function HouseCard({ house }: { house: HouseSummary }) {
+const navigate = useNavigate();
   return (
     <button
-      onClick={onClick}
+      onClick={() => navigate(`/houses/${house.id}`)}
       className="text-left rounded-2xl p-4"
       style={{ backgroundColor: "#FFFFFF", border: `1px solid ${BORDER}` }}
     >
