@@ -1,11 +1,12 @@
 // src/components/TaskDetailPage.tsx
 
 import { useEffect, useState } from "react";
-import { ArrowLeft, Pencil } from "lucide-react";
+import { ArrowLeft, Pencil, Check } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { EditTaskModal } from "./EditTaskModal";
 import type { Task } from "../types";
+import { ImageModal } from "./ImageModal";
 
 
 const BORDER = "#E0E3D6";
@@ -34,6 +35,7 @@ export function TaskDetailPage() {
   const [task, setTask] = useState<Task | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [showEdit, setShowEdit] = useState(false);
+const [fullImage, setFullImage] = useState<string | null>(null);
 
 
   const API = import.meta.env.VITE_API_URL;
@@ -89,7 +91,15 @@ export function TaskDetailPage() {
     );
   }
 
-
+async function handleMarkDone() {
+  try {
+    const res = await fetch(`${API}/api/tasks/${taskId}/complete`, { method: "PATCH" });
+    if (!res.ok) throw new Error();
+    loadTask();
+  } catch {
+    setError("Could not mark task as done — try again");
+  }
+}
 
 
   return (
@@ -112,33 +122,34 @@ export function TaskDetailPage() {
 
 
       <div className="flex items-start justify-between mb-4">
+  <h2
+    className={`text-[20px] font-semibold ${task.completedAt ? "line-through" : ""}`}
+  >
+    {task.title}
+  </h2>
 
+  <div className="flex items-center gap-2">
+    {!task.completedAt && (
+      <button
+        onClick={handleMarkDone}
+        className="flex items-center gap-1 text-sm font-medium rounded-full px-3.5 py-2 text-white"
+        style={{ backgroundColor: "#2F5233" }}
+      >
+        <Check size={14} />
+        Mark done
+      </button>
+    )}
 
-        <h2
-          className={`text-[20px] font-semibold ${
-            task.completedAt
-              ? "line-through"
-              : ""
-          }`}
-        >
-          {task.title}
-        </h2>
-
-
-
-        <button
-          onClick={() => setShowEdit(true)}
-          className="flex items-center gap-1 text-sm font-medium rounded-full px-3.5 py-2"
-          style={{
-            border: `1px solid ${BORDER}`
-          }}
-        >
-          <Pencil size={14} />
-          Edit
-        </button>
-
-
-      </div>
+    <button
+      onClick={() => setShowEdit(true)}
+      className="flex items-center gap-1 text-sm font-medium rounded-full px-3.5 py-2"
+      style={{ border: `1px solid ${BORDER}` }}
+    >
+      <Pencil size={14} />
+      Edit
+    </button>
+  </div>
+</div>
 
 
 
@@ -186,14 +197,15 @@ export function TaskDetailPage() {
 
     <div className="flex flex-wrap gap-3 mt-2">
       {task.descImages.map((url) => (
-        <img
-          key={url}
-          src={url}
-          alt="Description"
-          className="w-32 h-32 object-cover rounded-xl border"
-          style={{ borderColor: BORDER }}
-        />
-      ))}
+  <img
+    key={url}
+    src={url}
+    alt="Description"
+    className="w-32 h-32 object-cover rounded-xl border cursor-pointer"
+    style={{ borderColor: BORDER }}
+    onClick={() => setFullImage(url)}
+  />
+))}
     </div>
   </div>
 )}
@@ -235,14 +247,15 @@ export function TaskDetailPage() {
 
     <div className="flex flex-wrap gap-3 mt-2">
       {task.toolImages.map((url) => (
-        <img
-          key={url}
-          src={url}
-          alt="Tools"
-          className="w-32 h-32 object-cover rounded-xl border"
-          style={{ borderColor: BORDER }}
-        />
-      ))}
+  <img
+    key={url}
+    src={url}
+    alt="Tools"
+    className="w-32 h-32 object-cover rounded-xl border cursor-pointer"
+    style={{ borderColor: BORDER }}
+    onClick={() => setFullImage(url)}
+  />
+))}
     </div>
   </div>
 )}
@@ -286,14 +299,15 @@ export function TaskDetailPage() {
 
     <div className="flex flex-wrap gap-3 mt-2">
       {task.howtoImages.map((url) => (
-        <img
-          key={url}
-          src={url}
-          alt="Howto"
-          className="w-32 h-32 object-cover rounded-xl border"
-          style={{ borderColor: BORDER }}
-        />
-      ))}
+  <img
+    key={url}
+    src={url}
+    alt="Howto"
+    className="w-32 h-32 object-cover rounded-xl border cursor-pointer"
+    style={{ borderColor: BORDER }}
+    onClick={() => setFullImage(url)}
+  />
+))}
     </div>
   </div>
 )}
@@ -340,6 +354,9 @@ export function TaskDetailPage() {
 
       )}
 
+{fullImage && (
+  <ImageModal src={fullImage} onClose={() => setFullImage(null)} />
+)}
 
     </div>
 

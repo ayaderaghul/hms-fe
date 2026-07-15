@@ -8,7 +8,7 @@ function colorFor(id: string) {
 }
 
 export function AvatarStack({ people, max = 4 }: { people: { id: string; username: string }[]; max?: number }) {
-  const shown = people.slice(0, max);
+  const shown = people?.slice(0, max);
   const overflow = people.length - shown.length;
 
   return (
