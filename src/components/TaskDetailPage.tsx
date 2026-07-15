@@ -175,7 +175,28 @@ export function TaskDetailPage() {
 
         )}
 
+{task.descImages && task.descImages.length > 0 && (
+  <div>
+    <p
+      className="text-[11px] uppercase tracking-wide"
+      style={{ color: "#94A090" }}
+    >
+      Description images
+    </p>
 
+    <div className="flex flex-wrap gap-3 mt-2">
+      {task.descImages.map((url) => (
+        <img
+          key={url}
+          src={url}
+          alt="Description"
+          className="w-32 h-32 object-cover rounded-xl border"
+          style={{ borderColor: BORDER }}
+        />
+      ))}
+    </div>
+  </div>
+)}
 
 
 
@@ -203,6 +224,28 @@ export function TaskDetailPage() {
         )}
 
 
+{task.toolImages && task.toolImages.length > 0 && (
+  <div>
+    <p
+      className="text-[11px] uppercase tracking-wide"
+      style={{ color: "#94A090" }}
+    >
+      Tool images
+    </p>
+
+    <div className="flex flex-wrap gap-3 mt-2">
+      {task.toolImages.map((url) => (
+        <img
+          key={url}
+          src={url}
+          alt="Tools"
+          className="w-32 h-32 object-cover rounded-xl border"
+          style={{ borderColor: BORDER }}
+        />
+      ))}
+    </div>
+  </div>
+)}
 
 
 
@@ -232,6 +275,28 @@ export function TaskDetailPage() {
 
 
 
+{task.howtoImages && task.howtoImages.length > 0 && (
+  <div>
+    <p
+      className="text-[11px] uppercase tracking-wide"
+      style={{ color: "#94A090" }}
+    >
+      Howto images
+    </p>
+
+    <div className="flex flex-wrap gap-3 mt-2">
+      {task.howtoImages.map((url) => (
+        <img
+          key={url}
+          src={url}
+          alt="Howto"
+          className="w-32 h-32 object-cover rounded-xl border"
+          style={{ borderColor: BORDER }}
+        />
+      ))}
+    </div>
+  </div>
+)}
 
 
 

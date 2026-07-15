@@ -20,6 +20,10 @@ export interface Task {
   desc: string;
   tools: string[];
   howto: string;
+  descImages: string[];
+toolImages: string[];
+howtoImages: string[];
+
   dueDate: string | null;
   completedAt: string | null;
 }
