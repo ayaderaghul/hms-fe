@@ -84,6 +84,8 @@ const [showAddTemplate, setShowAddTemplate] = useState(false);
       {showNewTemplate && (
   <div className="pt-3 border-t" style={{ borderColor: BORDER }}>
     <TaskForm
+      houseId={houseId}
+
       submitLabel="Save template"
       submittingLabel="Saving..."
       onSubmit={async (form) => {

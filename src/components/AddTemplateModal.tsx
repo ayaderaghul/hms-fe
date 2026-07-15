@@ -15,6 +15,7 @@ export function AddTemplateModal({
   return (
     <Modal title="New template" onClose={onClose}>
       <TaskForm
+        houseId={houseId}
         submitLabel="Create template"
         submittingLabel="Creating..."
         onSubmit={async (form) => {
