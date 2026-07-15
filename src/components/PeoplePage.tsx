@@ -11,9 +11,10 @@ export function PeoplePage() {
   const [people, setPeople] = useState<Person[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [showAddPerson, setShowAddPerson] = useState(false);
+  const API = import.meta.env.VITE_API_URL;
 
   function loadPeople() {
-    fetch(`/api/houses/${houseId}/people`)
+    fetch(`${API}/api/houses/${houseId}/people`)
       .then((res) => res.json())
       .then(setPeople)
       .catch(() => setError("Could not load people"));
